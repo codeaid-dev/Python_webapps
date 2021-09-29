@@ -1,0 +1,15 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 GETサンプル
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<form action="/hello" method="GET">
+  名前：<input type="text" name="name">
+  <button type="submit">送信</button>
+</form>
+{% endblock %}
