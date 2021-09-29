@@ -1,0 +1,29 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+カフェメニュー
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+  <div>
+    <table border="solid">
+      <thead>
+        <tr>
+          <th>メニュー</th>
+          <th>価格</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in menu %}
+        <tr>
+          <td>{{m.item}}</td>
+          <td>{{m.price}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
