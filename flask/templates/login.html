@@ -1,0 +1,17 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 掲示板
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<h2>ログイン</h2>
+<form action="/check_login" method="POST">
+  ユーザー名：<input type="text" name="user"><br>
+  パスワード：<input type="password" name="pw"><br>
+  <button type="submit">送信</button>
+</form>
+{% endblock %}

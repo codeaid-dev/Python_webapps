@@ -1,0 +1,13 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 掲示板
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<h2>{{msg}}</h2>
+<div><a href="/">トップページへ</a></div>
+{% endblock %}

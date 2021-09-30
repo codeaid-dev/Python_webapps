@@ -1,0 +1,24 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 掲示板
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<h2>ログイン中 - {{user}}</h2>
+<p><a href="/logout">ログアウト</a></p>
+<form action="/write" method="POST">
+  <textarea name="bbs" rows="4" cols="60"></textarea><br>
+  <button type="submit">書込</button>
+</form>
+
+{% for i in data %}
+  <div>
+    <p>{{i.name}} - {{i.date}}</p>
+    <p>{{i.text}}</p>
+  </div>
+{% endfor %}
+{% endblock %}
