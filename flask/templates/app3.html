@@ -1,0 +1,18 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 POSTサンプル
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<h2>メッセージ</h2>
+<div style="background:yellow; padding:1rem; max-width: 700px;">{{msg}}</div>
+<h2>メッセージ内容を更新</h2>
+<form action="/write" method="POST">
+  <textarea name="msg" rows="5" cols="50"></textarea><br>
+  <button type="submit">書込</button>
+</form>
+{% endblock %}
