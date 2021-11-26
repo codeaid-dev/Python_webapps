@@ -11,6 +11,7 @@ def index():
     if os.path.exists(MESSAGE):
         with open(MESSAGE, 'r') as f:
             msg = f.read()
+        msg = msg.replace('\n', '<br>')
 
     return render_template('app3.html', msg=msg)
 

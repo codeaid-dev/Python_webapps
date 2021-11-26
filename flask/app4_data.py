@@ -7,7 +7,11 @@ def load_data():
     if not os.path.exists(SAVE_FILE):
         return []
     with open(SAVE_FILE, 'rt') as f:
-        return json.load(f)
+        data = json.load(f)
+        for d in data:
+            d['text'] = d['text'].replace('\r', '')
+            d['text'] = d['text'].replace('\n', '<br>')
+        return data
 
 def save_data(data_list):
     with open(SAVE_FILE, 'wt') as f:
