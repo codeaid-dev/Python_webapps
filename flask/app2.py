@@ -9,7 +9,7 @@ def index():
 @app.route('/hello')
 def hello():
     name = request.args.get('name')
-    if name is None:
+    if name is None or name == '':
         name = '名無し'
     return render_template('app2_hello.html', name=name)
 
