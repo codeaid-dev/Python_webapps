@@ -1,0 +1,26 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 フォトギャラリー
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<p><a href="/gallery/?page=1">ギャラリー</a></p>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  <ul style="color: red;">
+  {% for message in messages %}
+    <li>{{ message }}</li>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+<h2>ファイルアップロード</h2>
+<form method=post enctype=multipart/form-data>
+  <input type=file name=file>
+  <button type=submit>アップロード</button>
+</form>
+{% endblock %}

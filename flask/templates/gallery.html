@@ -1,0 +1,26 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 フォトギャラリー
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<p><a href="/">アップロード</a></p>
+<p>{{msg}}</p>
+{% for img in entries[page] %}
+  <p>{{img}}</p>
+  <img src="/static/images/{{img}}">
+{% endfor %}
+<p>
+  {% for i in range(1,pages+1) %}
+    {% if i != page+1 %}
+      <span style="margin: 5px;"><a href="/gallery?page={{i}}">{{i}}</a></span>
+    {% else %}
+      <span style="margin: 5px;">{{i}}</span>
+    {% endif %}
+  {% endfor %}
+</p>
+{% endblock %}
