@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from datetime import datetime
 import os
+import imghdr
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -8,9 +9,16 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 app.secret_key = os.urandom(16)
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def allowed_file(file, name=True):
+    if name:
+        return '.' in file and \
+               file.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    else:
+        if '.' in file.filename and \
+               file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+            return imghdr.what(file.stream) in ALLOWED_EXTENSIONS
+        else:
+            return False
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -25,7 +33,7 @@ def upload_file():
             flash('ファイルが選択されていません。')
             return redirect(request.url)
         # ファイル名をチェックして画像ファイルか確認
-        if file and allowed_file(file.filename):
+        if file and allowed_file(file,name=False):
             filename = file.filename.rsplit('.', 1)[0] + '_' + datetime.now().strftime('%Y%m%d%H%M%S')
             filename += '.' + file.filename.rsplit('.', 1)[1]
             file.save(os.path.join('./static/images', filename))
@@ -54,5 +62,26 @@ def gallery():
         kwargs['pages'] = 0
 
     return render_template('gallery.html', **kwargs)
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    kwargs = {}
+    kwargs['msg'] = '画像はまだありません。'
+    with os.scandir('./static/images') as it:
+        entries = [entry.name for entry in it if entry.is_file() and allowed_file(entry.name)]
+    entries.sort()
+    cnt = len(entries)
+    if cnt > 0:
+        kwargs['msg'] = f'合計{cnt}枚の画像があります。'
+        kwargs['entries'] = entries
+
+    if request.method == 'POST':
+        if 'files' in request.form:
+            files = request.form.getlist('files')
+        for fn in files:
+            os.remove('./static/images/'+fn)
+        return redirect(request.url)
+
+    return render_template('delete.html', **kwargs)
 
 app.run(port=8000, debug=True)

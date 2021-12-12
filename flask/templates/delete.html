@@ -1,0 +1,23 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 フォトギャラリー
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+<p><a style="margin-right: 20px;" href="/">アップロード</a><a href="/gallery/?page=1">ギャラリー</a></p>
+<h2>削除ページ</h2>
+<p>{{msg}}</p>
+<form action="/delete" method="POST">
+  {% for fname in entries %}
+  <div>
+    <input type="checkbox" id="{{fname}}" name="files" value="{{fname}}">
+    <label for="{{fname}}">{{fname}}</label>
+  </div>
+  {% endfor %}
+  <div style="margin-top: 20px;"><button type="submit">削除</button></div>
+</form>
+{% endblock %}

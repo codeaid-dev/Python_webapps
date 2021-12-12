@@ -8,7 +8,7 @@ Flask実習 フォトギャラリー
 
 {# コンテンツのブロックを記述 #}
 {% block contents %}
-<p><a href="/gallery/?page=1">ギャラリー</a></p>
+<p><a style="margin-right: 20px;" href="/delete">削除ページ</a><a href="/gallery/?page=1">ギャラリー</a></p>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
   <ul style="color: red;">

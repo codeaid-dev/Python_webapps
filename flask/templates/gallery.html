@@ -8,7 +8,7 @@ Flask実習 フォトギャラリー
 
 {# コンテンツのブロックを記述 #}
 {% block contents %}
-<p><a href="/">アップロード</a></p>
+<p><a style="margin-right: 20px;" href="/delete">削除ページ</a><a href="/">アップロード</a></p>
 <p>{{msg}}</p>
 {% for img in entries[page] %}
   <p>{{img}}</p>
