@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="content">
+        <div id="container">
+            <dl class="accordion">
+                <dt><h1>□ 会員制の掲示板 - {{ user }}</h1></dt>
+                <dd><a href="/logout">→ログアウト</a></dd>
+            </dl>
+        </div>
+        <form action="/write" method="POST">
+            <textarea name="ta" rows="4" cols="60"></textarea>
+            <button type="submit" class="btn btn-primary">書き込む</button>
+        </form>
+        <!-- 掲示板のログを表示 -->
+        {% for i in data %}
+            <div class="box">
+                <p class="box_h">{{ i.name }} - {{ i.date }}</p>
+                <p>{{ i.text }}</p>
+            </div>
+        {% endfor %}
+        <!-- アコーディオンメニューの開閉処理 -->
+        <script>
+            const dt_tags = document.querySelectorAll('.accordion dt');
+            dt_tags.forEach(dt => {
+                dt.addEventListener('click', () => {
+                    dt.classList.toggle('open');
+                    dt.nextElementSibling.classList.toggle('open');
+                })
+            });
+        </script>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
