@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Share</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="content">
+        <h1>
+            <!--タイトル-->
+            {% if mode == 'upload' %}
+                アップロード完了
+            {% else %}
+                ダウンロードできます
+            {% endif %}
+        </h1>
+        <div class="box-noborder">
+            <p>ファイルの情報：</p>
+            <table class="table">
+                <tr>
+                    <th scope="row">所有者</th>
+                    <td>{{ meta.name }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">ファイルの説明</th>
+                    <td>{{ meta.memo }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">ファイル名</th>
+                    <td>{{ meta.filename }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">ダウンロード回数</th>
+                    <td>{{ meta.count }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">保存期限</th>
+                    <td>{{ meta.time_limit | datetime }}</td>
+                </tr>
+            </table>
+        </div>
+        {% if mode == 'upload' %}
+            <div class="box-novorder">
+                <p>ダウンロード先の情報：</p>
+                <table class="table">
+                    <tr>
+                        <th scope="row">URL</th>
+                        <td><input size="30" value="{{ url }}"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">パスワード</th>
+                        <td>{{ meta.pw }}</td>
+                    </tr>
+                </table>
+            </div>
+        {% else %}
+            <div class="box-noborder">
+                <form action="{{ url }}" method="POST">
+                    <label for="pw">パスワード</label>
+                    <input type="text" name="pw" id="pw" size="16">
+                    <button type="submit" class="btn btn-primary">ダウンロード</button>
+                </form>
+            </div>
+        {% endif %}
+            <p><a href="/">→他のファイルをアップロード</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
