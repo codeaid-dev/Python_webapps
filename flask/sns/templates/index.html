@@ -1,0 +1,36 @@
+{% extends "layout_login.html" %}
+
+{% block contents %}
+  {# お気に入り登録しているユーザーの一覧を表示 #}
+  <div class="box">
+    お気に入りの作家：
+    {% for u in fav_users %}
+    <a class="btn btn-secondary" href="/users/{{ u }}">{{ u }}</a>
+    {% endfor %}
+  </div>
+
+  {# すべてのユーザーの一覧を表示 #}
+  <div class="box">
+    すべての作家：
+    {% for u in users %}
+    <a class="btn btn-secondary" href="/users/{{ u }}">{{ u }}</a>
+    {% endfor %}
+  </div>
+
+  {# タイムラインを表示 #}
+  <h3>{{ id }}のタイムライン</h3>
+  <div class="haiku-list">
+    {% if timelines | length == 0 %}
+    <div class="box">タイムラインに作品がありません。俳句を書くか他のユーザーをお気に入りにしてください。</div>
+    {% endif %}
+    {% for i in timelines %}
+    <div class="haiku">
+      {{ i.text | linebreak }}
+      <p class="info">
+        {{ i.time | datestr }}
+        作：<a href="/users/{{ i.id }}">{{ i.id }}</a>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block contents %}
+  <div id="loginform">
+    <form action="/login/try" method="POST">
+      <div class="mb-3">
+        <label for="user" class="form-label">ユーザー名</label>
+        <input type="text" class="form-control" name="user" id="user" placeholder="ユーザー名">
+      </div>
+      <div class="mb-3">
+        <label for="pw" class="form-label">パスワード</label>
+        <input type="password" class="form-control" name="pw" id="pw" placeholder="パスワード">
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary">ログイン</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
