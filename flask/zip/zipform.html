@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>住所入力</title>
+</head>
+<body>
+  <h1>住所入力</h1>
+  <div><form>
+    郵便番号：<br>
+    <input type="text" name="zip" id="zip">
+    <button type="button" id="zipbtn">自動入力</button><br>
+    住所：<br>
+    <input type="text" name="addr" id="addr" size="60"><br>
+    <button type="submit">送信</button>
+  </form></div>
+  <script>
+    const API = "/api?q=";
+    const zip = document.querySelector('#zip');
+    const addr = document.querySelector('#addr');
+    const btn = document.querySelector('#zipbtn');
+    btn.addEventListener('click', ()=>{
+      const q = zip.value.replace('-', '');
+      addr.value = ''
+      let request = new XMLHttpRequest();
+      request.open('GET', API+q);
+      request.responseType ='json';
+      request.send(null);
+
+      request.onreadystatechange = function() {
+        if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
+          if (addr.value == '') {
+            addr.value = request.response[0];
+          }
+        }
+      }
+    }); //addEventListener
+  </script>
+</body>
+</html>
