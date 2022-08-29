@@ -1,4 +1,5 @@
-FLASK_APP=apps.minimalapp.app.py
+#FLASK_APP=apps.minimalapp.app.py
+FLASK_APP=apps.app:create_app
 FLASK_ENV=development
 
 # flask-mailコンフィグ設定
