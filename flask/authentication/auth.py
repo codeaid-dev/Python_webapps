@@ -9,7 +9,8 @@ db_path = base_path + '/users.db'
 # データベースにテーブルを作成
 def create_db():
     con = sqlite3.connect(db_path)
-    con.execute('''
+    cur = con.cursor()
+    cur.execute('''
     CREATE TABLE IF NOT EXISTS users (
         name TEXT NOT NULL PRIMARY KEY,
         pass TEXT NOT NULL
