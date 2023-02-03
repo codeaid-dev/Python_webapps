@@ -7,7 +7,7 @@ $date = "";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   list($errors, $input) = validate_form();
   if ($errors) {
-    print 'これらのエラーを修正してください。<ul><li>';
+    print '<ul><li>';
     print implode('</li><li>', $errors);
     print '</li></ul>';
     //exit();
@@ -54,31 +54,20 @@ function validate_form() {
   $input['price'] = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT);
   $input['page'] = filter_input(INPUT_POST, 'page', FILTER_VALIDATE_INT);
   $errors = array();
+  $GLOBALS['isbn'] = htmlspecialchars($_POST['isbn']);
   if (empty($input['isbn'])) {
     $errors[] = 'ISBNは数字で入力してください。';
-  } else {
-    $GLOBALS['isbn'] = htmlspecialchars($_POST['isbn']);
   }
-  if (empty($_POST['name'])) {
-    $errors[] = '書籍名を入力してください。';
-  } else {
-    $GLOBALS['name'] = htmlspecialchars($_POST['name']);
-  }
+  $GLOBALS['name'] = htmlspecialchars($_POST['name']);
+  $GLOBALS['price'] = htmlspecialchars($_POST['price']);
   if (empty($input['price'])) {
     $errors[] = '価格は数字を入力してください。';
-  } else {
-    $GLOBALS['price'] = htmlspecialchars($_POST['price']);
   }
+  $GLOBALS['page'] = htmlspecialchars($_POST['page']);
   if (empty($input['page'])) {
     $errors[] = 'ページ数は数字を入力してください。';
-  } else {
-    $GLOBALS['page'] = htmlspecialchars($_POST['page']);
   }
-  if (empty($_POST['date'])) {
-    $errors[] = '発売日を入力してください。';
-  } else {
-    $GLOBALS['date'] = htmlspecialchars($_POST['date']);
-  }
+  $GLOBALS['date'] = htmlspecialchars($_POST['date']);
 
   return array($errors, $input);
 }
@@ -93,11 +82,11 @@ function validate_form() {
 <body>
   <h1>書籍データ庫</h1>
   <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
-    <p><label>ISBN：<input type="text" name="isbn" value=<?= htmlspecialchars($isbn) ?>></label></p>
-    <p><label>書籍名：<input type="text" name="name" value=<?= htmlspecialchars($name) ?>></label></p>
-    <p><lave>価格：<input type="text" name="price" value=<?= htmlspecialchars($price) ?>></lave></p>
-    <p><lave>ページ数：<input type="text" name="page" value=<?= htmlspecialchars($page) ?>></lave></p>
-    <p><lave>発売日：<input type="date" name="date" value=<?= htmlspecialchars($date) ?>></lave></p>
+    <p><label>ISBN：<input type="text" name="isbn" value="<?= htmlspecialchars($isbn) ?>" required></label></p>
+    <p><label>書籍名：<input type="text" name="name" value="<?= htmlspecialchars($name) ?>" required></label></p>
+    <p><label>価格：<input type="text" name="price" value="<?= htmlspecialchars($price) ?>" required></label></p>
+    <p><label>ページ数：<input type="text" name="page" value="<?= htmlspecialchars($page) ?>" required></label></p>
+    <p><label>発売日：<input type="date" name="date" value="<?= htmlspecialchars($date) ?>" required></label></p>
     <button type="submit">保存</button>
   </form>
   <p><span style="margin-right: 30px"><a href="index.html">トップ</a></span><a href="read.php">閲覧ページ</a></p>

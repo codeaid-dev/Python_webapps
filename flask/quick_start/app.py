@@ -59,4 +59,4 @@ with app.test_request_context():
     print(url_for('static', filename='style.css')) #static/style.cssファイルが存在する必要がある
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=8000)

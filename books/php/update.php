@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } else {
     list($errors, $input) = validate_form();
     if ($errors) {
-      print 'これらのエラーを修正してください。<ul><li>';
+      print '<ul><li>';
       print implode('</li><li>', $errors);
       print '</li></ul>';
       $update = htmlspecialchars($_POST['isbn']);
@@ -47,18 +47,18 @@ function validate_form() {
   $input['price'] = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_INT);
   $input['page'] = filter_input(INPUT_POST, 'page', FILTER_VALIDATE_INT);
   $errors = array();
-  if (empty($_POST['name'])) {
-    $errors[] = '書籍名を入力してください。';
-  }
+//  if (empty($_POST['name'])) {
+//    $errors[] = '書籍名を入力してください。';
+//  }
   if (empty($input['price'])) {
     $errors[] = '価格は数字を入力してください。';
   }
   if (empty($input['page'])) {
     $errors[] = 'ページ数は数字を入力してください。';
   }
-  if (empty($_POST['date'])) {
-    $errors[] = '発売日を入力してください。';
-  }
+//  if (empty($_POST['date'])) {
+//    $errors[] = '発売日を入力してください。';
+//  }
 
   return array($errors, $input);
 }
@@ -80,10 +80,10 @@ function validate_form() {
       <p>ISBN：<?= htmlspecialchars($isbn) ?>（修正できました）</p>
       <p><input type="hidden" name="isbn" value=<?= htmlspecialchars($isbn) ?>></label></p>
     <?php endif; ?>
-    <p><label>書籍名：<input type="text" name="name" value=<?= htmlspecialchars($name) ?>></label></p>
-    <p><lave>価格：<input type="text" name="price" value=<?= htmlspecialchars($price) ?>></lave></p>
-    <p><lave>ページ数：<input type="text" name="page" value=<?= htmlspecialchars($page) ?>></lave></p>
-    <p><lave>発売日：<input type="date" name="date" value=<?= htmlspecialchars($date) ?>></lave></p>
+    <p><label>書籍名：<input type="text" name="name" value="<?= htmlspecialchars($name) ?>" required></label></p>
+    <p><label>価格：<input type="text" name="price" value="<?= htmlspecialchars($price) ?>" required></label></p>
+    <p><label>ページ数：<input type="text" name="page" value="<?= htmlspecialchars($page) ?>" required></label></p>
+    <p><label>発売日：<input type="date" name="date" value="<?= htmlspecialchars($date) ?>" required></label></p>
     <button type="submit">修正</button>
   </form>
   <p><span style="margin-right: 30px"><a href="index.html">トップ</a></span><a href="read.php">閲覧ページ</a></p>
