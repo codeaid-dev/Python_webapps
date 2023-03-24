@@ -55,4 +55,26 @@ def gallery():
 
     return render_template('gallery.html', **kwargs)
 
-app.run(port=8000, debug=True)
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    kwargs = {}
+    kwargs['msg'] = '画像はまだありません。'
+    with os.scandir('./static/images') as it:
+        entries = [entry.name for entry in it if entry.is_file() and allowed_file(entry.name)]
+    entries.sort()
+    cnt = len(entries)
+    if cnt > 0:
+        kwargs['msg'] = f'合計{cnt}枚の画像があります。'
+        kwargs['entries'] = entries
+
+    if request.method == 'POST':
+        if 'files' in request.form:
+            files = request.form.getlist('files')
+        for fn in files:
+            os.remove('./static/images/'+fn)
+        return redirect(request.url)
+
+    return render_template('delete.html', **kwargs)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)

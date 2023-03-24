@@ -13,4 +13,5 @@ def hello():
         name = '名無し'
     return render_template('app2_hello.html', name=name)
 
-app.run(port=8000, debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)

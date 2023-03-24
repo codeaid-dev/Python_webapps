@@ -9,7 +9,7 @@ Flask実習 POSTサンプル
 {# コンテンツのブロックを記述 #}
 {% block contents %}
 <h2>メッセージ</h2>
-<div style="background:yellow; padding:1rem; max-width: 700px;">{{msg|safe}}</div>
+<div style="background:yellow; padding:1rem; max-width: 700px;">{{msg}}</div>
 <h2>メッセージ内容を更新</h2>
 <form action="/write" method="POST">
   <textarea name="msg" rows="5" cols="50"></textarea><br>

@@ -84,4 +84,5 @@ def delete():
 
     return render_template('delete.html', **kwargs)
 
-app.run(port=8000, debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', debug=True)
