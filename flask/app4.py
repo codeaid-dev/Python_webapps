@@ -1,11 +1,12 @@
 from flask import Flask, render_template
 from flask import request, redirect, session
-import os, json, datetime
+from datetime import timedelta
 import app4_login # ログイン管理
 import app4_data # データ入出力
 
 app = Flask(__name__)
 app.secret_key = 'Msd4EsJIk6AoVD3g' # セッション情報を暗号化するためのキー
+app.permanent_session_lifetime = timedelta(minutes=3) # セッション有効期限3分
 
 @app.route('/')
 def index():
