@@ -18,7 +18,11 @@ Flask実習 掲示板
 {% for i in data %}
   <div>
     <p>{{i.name}} - {{i.date}}</p>
-    <p>{{i.text|safe}}</p>
+    <p>
+      {% for s in i.text.split('\n') %}
+        {{s}}<br>
+      {% endfor %}
+    </p>
   </div>
 {% endfor %}
 {% endblock %}

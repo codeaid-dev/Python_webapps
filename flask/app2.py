@@ -11,7 +11,7 @@ def hello():
     name = request.args.get('name')
     if name is None or name == '':
         name = '名無し'
-    return render_template('app2_hello.html', name=name)
+    return render_template('app2hello.html', name=name)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

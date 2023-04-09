@@ -9,9 +9,10 @@ Flask実習 掲示板
 {# コンテンツのブロックを記述 #}
 {% block contents %}
 <h2>ログイン</h2>
+<p><a href="/signup">ユーザー登録</a></p>
 <form action="/check_login" method="POST">
   ユーザー名：<input type="text" name="user"><br>
-  パスワード：<input type="password" name="pw"><br>
+  パスワード：<input type="password" name="password"><br>
   <button type="submit">送信</button>
 </form>
 {% endblock %}

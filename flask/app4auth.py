@@ -1,4 +1,4 @@
-from flask import session, redirect
+from flask import session
 
 def is_login():
     return 'login' in session
