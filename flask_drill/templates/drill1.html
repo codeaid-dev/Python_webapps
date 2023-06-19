@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+占い
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+  <p><label>名前：<input type="text" name="name" required></label></p>
+  <button type="submit">占う</button>
+</form>
+<h2>結果表示</h2>
+{% if msg %}
+  <p>{{ msg }}</p>
+{% endif %}
+{% endblock %}
