@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+簡易ルーレット
+{% endblock %}
+
+{% block contents %}
+<p>数字と色と賭ける種類を選択し回すボタンを押してください。</p>
+<form method="POST">
+  <fieldset style="width: 400px;">
+    <legend>数字</legend>
+    <div>
+    {% for i in range(6) %}
+    {% if i==0 %}
+      <label><input type="radio" name="nums" value="{{i*10}}" checked>{{ i }}0</label>
+    {% else %}
+      <label><input type="radio" name="nums" value="{{i*10}}">{{ i }}0</label>
+    {% endif %}
+    {% endfor %}
+    </div>
+  </fieldset>
+  <fieldset style="width: 400px;">
+    <legend>色</legend>
+    <div>
+    <label><input type="radio" name="colors" value="赤" checked>赤</label>
+    <label><input type="radio" name="colors" value="黒">黒</label>
+    </div>
+  </fieldset>
+  <p>
+  <label for="bets">賭ける種類：</label>
+  <select name="bets" id="bets">
+    <option value="1">数字と色の組み合わせ</option>
+    <option value="2">数字のみ</option>
+    <option value="3">色のみ</option>
+  </select>
+  </p>
+  <p><button type="submit" name="roulette">回す</button></p>
+</form>
+{% if msg %}
+  <p>{{ msg | safe}}</p>
+{% endif %}
+{% endblock %}
