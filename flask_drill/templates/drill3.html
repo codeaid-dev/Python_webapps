@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+あなたの星座
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+  <select name="month" id="month">
+    {% for i in range(1,13) %}
+    <option value={{ i }}>{{ i }}</option>
+    {% endfor %}
+  </select>
+  <label for="month">月</label>
+  <select name="day" id="day">
+    {% for i in range(1,32) %}
+    <option value={{ i }}>{{ i }}</option>
+    {% endfor %}
+  </select>
+  <label for="day">日</label>
+  <button type="submit" name="seiza">表示</button>
+</form>
+<h2>結果表示</h2>
+{% if msg %}
+  <p>{{ msg }}</p>
+{% endif %}
+{% endblock %}
