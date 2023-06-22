@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+選択した色を表示
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+  <p><label><input type="checkbox" name="colors" value="red" {% if 'red' in colors %}checked{% endif %}>赤</label>
+    <label><input type="checkbox" name="colors" value="green" {% if 'green' in colors %}checked{% endif %}>緑</label>
+    <label><input type="checkbox" name="colors" value="blue" {% if 'blue' in colors %}checked{% endif %}>青</label></p>
+  <p><button type="submit">作れる色</button></p>
+</form>
+<h2>結果表示</h2>
+<div>
+</div>
+{% if msg %}
+  <p>{{ msg }}</p>
+{% endif %}
+{% endblock %}
