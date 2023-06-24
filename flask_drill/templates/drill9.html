@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+ポーカーの役を表示せよ
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+  <div>
+    <table>
+      <tbody>
+        {% if cards %}
+        <tr>
+          {% for c in cards %}
+          {% if c!=0 %}
+          <td align="center">{{c}}</td>
+          {% else %}
+          <td align="center">[カード]</td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+          {% for i in range(5) %}
+          <td align="center"><button type="submit" name="btn{{i+1}}">めくる</button></td>
+          {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
+<h2>結果表示</h2>
+{% if msg %}
+  <p>{{ msg }}</p>
+{% endif %}
+{% endblock %}
