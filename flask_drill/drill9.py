@@ -6,7 +6,6 @@ app = Flask(__name__)
 @app.route('/drill9')
 def index():
     page = request.args.get('page')
-    print(page)
     if page:
         page = int(page)
     else:

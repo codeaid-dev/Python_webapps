@@ -1,46 +1,36 @@
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, url_for, render_template, redirect
 import random
 
 app = Flask(__name__)
 
-cards = [0]*5
-@app.route('/drill10', methods=['GET','POST'])
+@app.route('/test', methods=['GET','POST'])
 def index():
+    genotype = ['AA','AO','BB','BO','AB','OO']
     if request.method == 'POST':
-        for i in range(5):
-            if f'btn{i+1}' in request.form and cards[i]==0:
-                num = random.randint(1,5)
-                while cards.count(num) >= 4:
-                    num = random.randint(1,5)
-                cards[i] = num
-        print(cards)
-        if not 0 in cards:
-            hand = {}
-            for n in cards:
-                if n not in hand.keys():
-                    hand[n] = cards.count(n)
-
-            val = list(hand.values())
-            if 4 in val:
-                msg = 'フォーカード'
-            elif 2 in val and 3 in val:
-                msg = 'フルハウス'
-            elif 3 in val:
-                msg = 'スリーカード'
-            elif val.count(2) == 2:
-                msg = 'ツーペア'
-            elif val.count(2) == 1:
-                msg = 'ワンペア'
+        mom = request.form['mother']
+        dad = request.form['father']
+        child = []
+        for m in mom:
+            for d in dad:
+                child.append(f'{m}{d}')
+        blood = []
+        for ch in child:
+            if ch == 'AA' or ch == 'AO' or ch == 'OA':
+                blood.append('A型')
+            elif ch == 'BB' or ch == 'BO' or ch == 'OB':
+                blood.append('B型')
+            elif ch == 'OO':
+                blood.append('O型')
             else:
-                msg = 'ノーハンド'
-        else:
-            msg = None
+                blood.append('AB型')
+        msg = 'と'.join(set(blood))
+        msg = '子の血液型は'+msg+'の可能性があります。'
     else:
-        for i in range(len(cards)):
-            cards[i]=0
         msg = None
+        mom = 'AA'
+        dad = 'AA'
 
-    return render_template('drill10.html', msg=msg, cards=cards)
+    return render_template('test.html', genotype=genotype, selectm=mom, selectf=dad, msg=msg)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
