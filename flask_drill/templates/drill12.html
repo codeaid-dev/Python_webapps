@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+パスワード生成
+{% endblock %}
+
+{% block contents %}
+{% if error %}
+  <p>{{ error }}</p>
+{% endif %}
+<form method="POST">
+  <p>
+    <label for="digit">桁数：</label>
+    <input type="text" name="digit" required>
+  </p>
+  <p><button type="submit" name="generate">生成</button></p>
+</form>
+<h2>結果表示</h2>
+{% if password %}
+  <p>{{ password }}</p>
+{% endif %}
+{% endblock %}
