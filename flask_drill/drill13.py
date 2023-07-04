@@ -33,7 +33,7 @@ def index():
         qflag = national_flags[question]
         result = None
     response = make_response(render_template('drill13.html', qflag=qflag, result=result))
-    max_age = 60 * 5
+    max_age = 60 * 1
     expires = int(datetime.now().timestamp())+max_age
     response.set_cookie('question', value=question, max_age=max_age, expires=expires)
     return response
