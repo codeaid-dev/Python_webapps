@@ -1,47 +1,41 @@
-from flask import Flask, request, render_template, make_response
+from flask import Flask, render_template, request, make_response, redirect, url_for
 from datetime import datetime
 import random
 
 app = Flask(__name__)
 
-@app.route('/test', methods=['GET','POST'])
+national_flags = {'ベルギー':'images/Belgium.png',
+                  'ブルガリア':'images/Bulgaria.png',
+                  'デンマーク':'images/Denmark.png',
+                  'フィンランド':'images/Finland.png',
+                  'ドイツ':'images/Germany.png',
+                  'ハンガリー':'images/Hungary.png',
+                  'イタリア':'images/Italy.png',
+                  'モナコ':'images/Monaco.png',
+                  'ポーランド':'images/Poland.png',
+                  'スウェーデン':'images/Sweden.png'}
+
+@app.route('/drill13', methods=['GET','POST'])
 def index():
-    count = request.cookies.get('count')
-    win = request.cookies.get('win')
-    result = request.cookies.get('result')
-    if request.method == 'POST' and 'pon' in request.form:
-        if count:
-            count = int(count)
-            if count==5:
-                count,win = 0,0
-                result = ''
-            count += 1
-            you = request.form['you']
-            com = random.choice(['ぐー','ちょき','ぱー'])
-            print(you)
-            if (you=='ぐー' and com=='ちょき') or (you=='ちょき' and com=='ぱー') or (you=='ぱー' and com=='ぐー'):
-                result += f'{count}回目：あなたの勝ち（{you}：{com}）\n'
-                win = int(win)
-                win += 1
-            elif (you=='ぐー' and com=='ぱー') or (you=='ちょき' and com=='ぐー') or (you=='ぱー' and com=='ちょき'):
-                result += f'{count}回目：コンピューターの勝ち（{you}：{com}）\n'
-            else:
-                result += f'{count}回目：あいこ（{you}：{com}）\n'
-            if count == 5:
-                result += f'5戦中{win}勝です。'
-            result = result.split('\n')
+    print('in here')
+    if request.method == 'POST' and 'answer' in request.form:
+        question = request.cookies.get('question')
+        if question == None:
+            return redirect(url_for('index'))
+        qflag = national_flags[question]
+        answer = request.form['kotae']
+        if question == answer:
+            result = '正解！！'
         else:
-            count,win = 0,0
-            result = []
+            result = f'不正解（正解：{question}）'
     else:
-        count,win = 0,0
-        result = []
-    response = make_response(render_template('test.html', result=result))
+        question = random.choice(list(national_flags))
+        qflag = national_flags[question]
+        result = None
+    response = make_response(render_template('drill13.html', qflag=qflag, result=result))
     max_age = 60 * 5
     expires = int(datetime.now().timestamp())+max_age
-    response.set_cookie('count', value=str(count), max_age=max_age, expires=expires)
-    response.set_cookie('win', value=str(win), max_age=max_age, expires=expires)
-    response.set_cookie('result', value='\n'.join(result), max_age=max_age, expires=expires)
+    response.set_cookie('question', value=question, max_age=max_age, expires=expires)
     return response
 
 if __name__ == '__main__':

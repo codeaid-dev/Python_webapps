@@ -1,24 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}
-じゃんけん5回戦
+国旗クイズ
 {% endblock %}
 
 {% block contents %}
+<p><img src="{{ url_for('static', filename=qflag) }}"></p>
 <form method="POST">
   <p>
-    <label style="margin-right: 10px;"><input type="radio" name="you" value="ぐー" checked>ぐー</label>
-    <label style="margin-right: 10px;"><input type="radio" name="you" value="ちょき">ちょき</label>
-    <label><input type="radio" name="you" value="ぱー">ぱー</label>
+    <label for="kotae">答え：</label>
+    <input type="text" name="kotae" id="kotae" required>
   </p>
-  <p><button type="submit" name="pon">ぽん</button></p>
+  <p><button type="submit" name="answer">答え</button></p>
 </form>
+<p><a href="/drill13"><button>次の問題</button></a></p>
 <h2>結果表示</h2>
 {% if result %}
-  <p>
-  {% for res in result %}
-    {{ res }}<br>
-  {% endfor %}
-  </p>
+  <p>{{ result }}</p>
 {% endif %}
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+じゃんけん5回戦
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+  <p>
+    <label style="margin-right: 10px;"><input type="radio" name="you" value="ぐー" checked>ぐー</label>
+    <label style="margin-right: 10px;"><input type="radio" name="you" value="ちょき">ちょき</label>
+    <label><input type="radio" name="you" value="ぱー">ぱー</label>
+  </p>
+  <p><button type="submit" name="pon">ぽん</button></p>
+</form>
+<h2>結果表示</h2>
+{% if result %}
+  <p>
+  {% for res in result %}
+    {{ res }}<br>
+  {% endfor %}
+  </p>
+{% endif %}
+{% endblock %}
