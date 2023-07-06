@@ -3,7 +3,7 @@ import random
 
 app = Flask(__name__)
 
-@app.route('/test', methods=['GET','POST'])
+@app.route('/drill10', methods=['GET','POST'])
 def index():
     genotype = ['AA','AO','BB','BO','AB','OO']
     if request.method == 'POST':
@@ -30,7 +30,7 @@ def index():
         mom = 'AA'
         dad = 'AA'
 
-    return render_template('test.html', genotype=genotype, selectm=mom, selectf=dad, msg=msg)
+    return render_template('drill10.html', genotype=genotype, selectm=mom, selectf=dad, msg=msg)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

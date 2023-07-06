@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block title %}
-国旗クイズ
+県庁所在地クイズ
 {% endblock %}
 
 {% block contents %}
-<p><img src="{{ url_for('static', filename=qflag) }}"></p>
+<p>問題：{{ question }}の県庁所在地は？</p>
 <form method="POST">
   <p>
+    <input type="hidden" name="question" value="{{question}}">
     <label for="kotae">答え：</label>
     <input type="text" name="kotae" id="kotae" value="{{answer}}" required>
   </p>
   <p><button type="submit" name="answer">解答</button></p>
 </form>
-<p><a href="/drill13"><button>次の問題</button></a></p>
+<p><a href="/drill15"><button>次の問題</button></a></p>
 <h2>結果表示</h2>
 {% if result %}
   <p>{{ result }}</p>

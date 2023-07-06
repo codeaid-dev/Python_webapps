@@ -17,7 +17,6 @@ national_flags = {'ベルギー':'images/Belgium.png',
 
 @app.route('/drill13', methods=['GET','POST'])
 def index():
-    print('in here')
     if request.method == 'POST' and 'answer' in request.form:
         question = request.cookies.get('question')
         if question == None:
@@ -31,8 +30,9 @@ def index():
     else:
         question = random.choice(list(national_flags))
         qflag = national_flags[question]
+        answer = ''
         result = None
-    response = make_response(render_template('drill13.html', qflag=qflag, result=result))
+    response = make_response(render_template('drill13.html', qflag=qflag, result=result, answer=answer))
     max_age = 60 * 1
     expires = int(datetime.now().timestamp())+max_age
     response.set_cookie('question', value=question, max_age=max_age, expires=expires)
