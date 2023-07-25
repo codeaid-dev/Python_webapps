@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+大阪府 - 郵便番号検索
+{% endblock %}
+
+{% block contents %}
+  <form method="POST">
+    <p><label>郵便番号：<input type="text" name="zip1" size="3" value="{{result['zip1']}}"> - 
+    <input type="text" name="zip2" size="4" value="{{result['zip2']}}"></label>
+    <button type="submit" name="ziptocity">検索</button></p>
+  </form>
+  <hr width="100px" align="left">
+  <form method="POST">
+    <p><label>市区町村名：<input type="text" name="city" value="{{result['city']}}"></label><br>
+    <p><label>地名：<input type="text" name="place" value="{{result['place']}}"></label>
+    <button type="submit" name="citytozip">検索</button></p>
+  </form>
+{% endblock %}
