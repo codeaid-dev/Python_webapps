@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+ユーザー登録
+{% endblock %}
+
+{% block contents %}
+  {% if result['error'] %}
+    <p style="color:red;">{{ result['error'] }}</p>
+  {% endif %}
+  <form method="POST">
+    <p><label>ユーザー名：<input type="text" name="username" required></label></p>
+    <p><label>メールアドレス：<input type="text" name="email" required></label></p>
+    <p><button type="submit">登録</button>
+  </form>
+  {% if result['success'] %}
+    <p>{{ result['success'] }}</p>
+  {% endif %}
+{% endblock %}
