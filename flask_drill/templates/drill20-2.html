@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+アルファベットクイズ
+{% endblock %}
+
+{% block contents %}
+<p>抜けているアルファベットはどれ？({{ corrects | length }}文字ぬけている)</p>
+<p style="font-size:32px;">{{question}}</p>
+<form method="POST">
+  <label>答え：<input type="text" name="answer"></label><br>
+  <br>
+  <button type="submit">送信</button>
+</form>
+<h2>結果表示</h2>
+{% if result %}
+  <p>{{ result }}</p>
+{% endif %}
+{% if exec_time %}
+  <p>かかった時間は{{exec_time}}秒です。</p>
+{% endif %}
+<p><a href="{{url_for('index')}}">トップ</a></p>
+{% endblock %}

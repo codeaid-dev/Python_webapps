@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+アルファベットクイズ
+{% endblock %}
+
+{% block contents %}
+<form method="POST">
+  <p>隠すアルファベットの数：</p>
+  <p><label><input type="radio" name="chars" value=1 checked>1文字</label>
+  <label><input type="radio" name="chars" value=2>2文字</label>
+  <label><input type="radio" name="chars" value=3>3文字</label></p>
+  <p><button type="submit" name="question">出題</button></p>
+</form>
+{% endblock %}
