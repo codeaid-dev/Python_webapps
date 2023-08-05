@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+ショッピングカート
+{% endblock %}
+
+{% block contents %}
+<h2>商品一覧</h2>
+<form method="POST">
+  {% for id,product in products.items() %}
+    <label>
+      <input type="checkbox" name="product_id" value="{{id}}">
+      {{product['name']}} ({{product['price']}}円)
+    </label>
+    <label><input type="number" name="quantity{{id}}" min="1" max="10" value="1">個</label>
+    <br>
+  {% endfor %}
+  <p><button type="submit" name="add_to_cart">カートに追加</button></p>
+</form>
+
+<h2>カート</h2>
+{% if cart %}
+  {% for product in cart.values() %}
+    {{product['name']}} ({{product['price']}}円) x {{product['quantity']}}個<br>
+  {% endfor %}
+  合計: {{total}}円(税込)<br>
+  <form method="POST"><button type="submit" name="del_from_cart">カートを空にする</button></form>
+{% else %}
+  <p>カートに商品はありません。</p>
+{% endif %}
+{% endblock %}
