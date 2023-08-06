@@ -12,7 +12,7 @@ products = {
   '2':{'name':'商品3', 'price':3000, 'quantity':0, 'subtotal':0}
 }
 
-@app.route('/test', methods=['GET','POST'])
+@app.route('/drill21', methods=['GET','POST'])
 def index():
     total = 0
     cart = {}
@@ -29,7 +29,6 @@ def index():
                     cart[id] = products[id]
                 cart[id]['subtotal'] = cart[id]['price']*cart[id]['quantity']
             for product in cart.values():
-                print(cart)
                 total += product['subtotal']
             session['cart'] = json.dumps(cart)
         elif 'del_from_cart' in request.form:

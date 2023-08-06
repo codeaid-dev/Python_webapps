@@ -1,0 +1,7 @@
+名前,メールアドレス,年齢,興味のあるプログラミング言語,学習に使っているパソコン,パソコンメーカー,コメント
+山田太郎,yamada@sample.com,25,PHP|JavaScript,デスクトップPC,Dynabook,test
+田中二郎,tanaka@saample.com,32,PHP|JavaScript,ノートPC,VAIO,"test
+test"
+ほげほげ,a@b.com,27,Python|Java|C/C++,デスクトップPC,Dynabook,"1行目
+2行目
+3行目"

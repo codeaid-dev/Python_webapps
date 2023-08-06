@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+アンケート
+{% endblock %}
+
+{% block contents %}
+{% if errors %}
+  <ul>
+    {% for err in errors %}
+      <li>{{ err }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+{% if normal %}
+  <ul><li>{{ normal }}</li></ul>
+{% endif %}
+<form method="POST">
+<table>
+  <tr><td><label for="name">名前：</label></td><td><input type="text" name="name" id="name" value="{{ vals[0] }}" required></td></tr>
+  <tr><td><label for="email">メールアドレス：</label></td><td><input type="email" name="email" id="email"  value="{{ vals[1] }}" required></td></tr>
+  <tr><td><label for="age">年齢：</label></td><td><input type="number" name="age" id="age" min="18" max="110"  value="{{ vals[2] }}" required></td></tr>
+  <tr><td>興味のある<br>プログラム言語：</td>
+  <td>
+    {% for k,v in vals[3].items() %}
+      <label><input type="checkbox" name="program" value="{{ k }}" {{ v }}>{{ k }}</label>
+    {% endfor %}
+  </td></tr><tr><td>学習に使われる<br>パソコン：</td>
+  <td>
+    {% for k,v in vals[4].items() %}
+    <label><input type="radio" name="pc" value="{{ k }}" {{ v }}>{{ k }}</label>
+    {% endfor %}
+  </td></tr>
+  <tr><td>パソコンメーカー：</td>
+  <td>
+    <select name="maker" required>
+      <option value="">選択してください。</option>
+      {% for k,v in vals[5].items() %}
+        <option value="{{ k }}" {{ v }}>{{ k }}</option>
+      {% endfor %}
+    </select>
+  </td></tr>
+  <tr><td>コメント：</td><td><textarea name="comments" rows="3" cols="30">{{ vals[6] }}</textarea></td></tr>
+</table>
+<br>
+<button type="submit">送信</button>
+</form>
+{% endblock %}
