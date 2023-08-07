@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}
+データベース①
+{% endblock %}
+
+{% block contents %}
+{% if result %}
+  <p>{{result}}</p>
+{% endif %}
+<form method="POST">
+  <p><label>製品名：<input type="text" name="product" required></label><br>
+  <label>価格(円)：<input type="number" name="price" required></label></p>
+  <button type="submit">登録</button>
+</form>
+<hr>
+<h2>製品一覧</h2>
+{% if data %}
+  <table border="1">
+    <thead>
+      <tr>
+        <th>番号</th>
+        <th>製品</th>
+        <th>価格(円)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for id,product,price in data %}
+        <tr><td>{{id}}</td>
+        <td>{{product}}</td>
+        <td>{{price}}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>製品の登録がありません。</p>
+{% endif %}
+{% endblock %}

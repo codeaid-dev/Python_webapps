@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+ログインとセッション
+{% endblock %}
+
+{% block contents %}
+{% if error %}
+  <p>{{error}}</p>
+{% endif %}
+{% if username and not error %}
+  <p>{{username}} ログイン中です。</p>
+  <form method="POST">
+    <button type="submit" name="logout">ログアウト</button>
+  </form>
+{% else %}
+  {% if logout %}
+    <p>{{username}} ログアウトしました。</p>
+  {% endif %}
+  <form method="POST">
+    <p><label>ユーザー名：<input type="text" name="username" value="{{username}}" required></label><br>
+    <label>パスワード：<input type="password" name="password" value="{{password}}" required></label></p>
+    <p><button type="submit" name="login">ログイン</button></p>
+  </form>
+{% endif %}
+{% endblock %}
