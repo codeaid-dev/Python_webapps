@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, redirect, url_for, session
+from flask import Flask, render_template, request, session
 from datetime import timedelta
 
 app = Flask(__name__)

@@ -1,13 +1,15 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for, session
-import sqlite3
+import sqlite3,os
 from contextlib import closing
 
 app = Flask(__name__)
+basepath = os.path.dirname(__file__)
+filepath = basepath+'/data/product.db'
 
 @app.route('/drill24', methods=['GET','POST'])
 def index():
     try:
-        with closing(sqlite3.connect('data/product.db')) as conn:
+        with closing(sqlite3.connect(filepath)) as conn:
             cur = conn.cursor()
             cur.execute('''CREATE TABLE IF NOT EXISTS products (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,7 +25,7 @@ def index():
         price = int(request.form['price'])
         print(product, price)
         try:
-            with closing(sqlite3.connect('data/product.db')) as conn:
+            with closing(sqlite3.connect(filepath)) as conn:
                 cur = conn.cursor()
                 cur.execute('INSERT INTO products (product, price) VALUES (?, ?)',(product,price))
                 conn.commit()
@@ -32,7 +34,7 @@ def index():
             print(e)
 
     try:
-        with closing(sqlite3.connect('data/product.db')) as conn:
+        with closing(sqlite3.connect(filepath)) as conn:
             cur = conn.cursor()
             cur.execute('SELECT * FROM products')
             data = cur.fetchall()
