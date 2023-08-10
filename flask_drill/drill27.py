@@ -14,6 +14,7 @@ def index():
     try:
         with closing(sqlite3.connect(filepath)) as conn:
             cur = conn.cursor()
+            cur.execute("PRAGMA foreign_keys = true")
             cur.execute('''CREATE TABLE IF NOT EXISTS products (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                         product VARCHAR(256) NOT NULL,
@@ -25,6 +26,7 @@ def index():
                         quantity INTEGER NOT NULL,
                         FOREIGN KEY(pid) REFERENCES products(id)
                         )''')
+            conn.commit()
     except sqlite3.Error as e:
         print(e)
 
@@ -47,6 +49,7 @@ def index():
             try:
                 with closing(sqlite3.connect(filepath)) as conn:
                     cur = conn.cursor()
+                    cur.execute('PRAGMA foreign_keys = true')
                     cur.execute('DELETE FROM products WHERE id=?',(id,))
                     conn.commit()
                     result = f'{id}:{product}を削除しました。'
@@ -151,7 +154,6 @@ def result(customer):
             print(e)
         return redirect(url_for('index'))
 
-    print(products)
     return render_template('drill27-result.html', products=products, customer=customer, total=int(total*1.1))
 
 
