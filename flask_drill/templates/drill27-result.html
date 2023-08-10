@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+データベース②
+{% endblock %}
+
+{% block contents %}
+<h2>注文確認</h2>
+{% if customer %}
+  <p>名前：{{customer}}</p>
+  {% for product in products.values() %}
+    {{ product['product'] }} ({{ product['price'] }}円) x {{ product['quantity'] }}個<br>
+  {% endfor %}
+  合計: {{total}}円(税込)<br>
+  <form method="POST">
+    <input type="hidden" name="customer" value="{{customer}}">
+    <p><button type="submit" name="delete">注文を消去しトップへ戻る</button></p>
+  </form>
+{% endif %}
+{% endblock %}

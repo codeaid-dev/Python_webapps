@@ -7,9 +7,9 @@ app.secret_key = 'Msd4EsJIk6AoVD3g' #セッション情報を暗号化するた�
 app.permanent_session_lifetime = timedelta(minutes=10) #セッション有効期限10分
 
 products = {
-  '0':{'name':'商品1', 'price':1000, 'quantity':0, 'subtotal':0},
-  '1':{'name':'商品2', 'price':2000, 'quantity':0, 'subtotal':0},
-  '2':{'name':'商品3', 'price':3000, 'quantity':0, 'subtotal':0}
+  '1':{'name':'商品1', 'price':1000, 'quantity':0, 'subtotal':0},
+  '2':{'name':'商品2', 'price':2000, 'quantity':0, 'subtotal':0},
+  '3':{'name':'商品3', 'price':3000, 'quantity':0, 'subtotal':0}
 }
 
 @app.route('/drill21', methods=['GET','POST'])

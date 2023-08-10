@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+データベース②
+{% endblock %}
+
+{% block contents %}
+<h2>注文画面</h2>
+<form method="POST">
+  {% if customer %}
+    <p><label>名前：<input type="text" name="customer" value="{{customer}}" readonly></label></p>
+  {% else %}
+    <p><label>名前：<input type="text" name="customer" required></label></p>
+  {% endif %}
+  <table border="1">
+    <thead>
+      <tr>
+        <th>番号</th>
+        <th>製品</th>
+        <th>価格(円)</th>
+        <th>購入</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for id,product in products.items() %}
+      <tr><td>{{id}}</td>
+      <td>{{product['product']}}</td>
+      <td>{{product['price']}}</td>
+      <td>
+        <input type="checkbox" name="product_id" value="{{id}}">
+        <label><input type="number" name="quantity{{id}}" min="1" max="10" value="1">個</label>
+      </td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p><button type="submit" name="add_to_cart">カートに追加</button></p>
+</form>
+
+<h2>カート</h2>
+{% if cart %}
+  {% for product in cart.values() %}
+    {{product['product']}} ({{product['price']}}円) x {{product['quantity']}}個<br>
+  {% endfor %}
+  合計: {{total}}円(税込)<br>
+  <form method="POST">
+    <p><button type="submit" name="oder" style="margin-right: 10px;">注文</button>
+    <button type="submit" name="del_from_cart">カートを空にする</button></p>
+  </form>
+{% else %}
+  <p>カートに商品はありません。</p>
+{% endif %}
+{% endblock %}
