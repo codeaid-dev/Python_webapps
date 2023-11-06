@@ -9,7 +9,7 @@ def gcd(a, b):
 
 @app.route('/drill8', methods=['GET','POST'])
 def index():
-    if request.method == 'POST' and 'calc' in request.form:
+    if request.method == 'POST':
         width = int(request.form['width'])
         height = int(request.form['height'])
         g = gcd(width, height)

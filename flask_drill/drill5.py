@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     nums = [0,10,20,30,40,50]
     colors = ['赤','黒']
-    if request.method == 'POST' and 'roulette' in request.form:
+    if request.method == 'POST':
         com_num = random.choice(nums)
         com_color = random.choice(colors)
         num = int(request.form['nums'])

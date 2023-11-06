@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/drill6', methods=['GET','POST'])
 def index():
-    if request.method == 'POST' and 'split' in request.form:
+    if request.method == 'POST':
         total = int(request.form['total'])
         people = int(request.form['people'])
         fraction = int(request.form['fraction'])
