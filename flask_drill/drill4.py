@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/drill4', methods=['GET','POST'])
 def index():
-    if request.method == 'POST' and 'measure' in request.form:
+    if request.method == 'POST':
         height = float(request.form['height'])
         weight = float(request.form['weight'])
         bmi = weight / ((height/100)**2)
