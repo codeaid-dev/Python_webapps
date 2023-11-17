@@ -1,0 +1,19 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 Session
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+{% if error %}
+  <p>{{ error }}</p>
+{% endif %}
+<form action="{{ url_for('login') }}" method="POST">
+  ユーザー名：<input type="text" name="username" required><br>
+  パスワード：<input type="password" name="password" required><br>
+  <button type="submit">ログイン</button>
+</form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{# base.htmlを継承する #}
+{% extends "base.html" %}
+
+{# タイトルのブロックを記述 #}
+{% block title %}
+Flask実習 Session
+{% endblock %}
+
+{# コンテンツのブロックを記述 #}
+{% block contents %}
+{% if username %}
+  <p>{{ username }} - ログイン中です。</p>
+  <p><a href="{{ url_for('logout') }}">ログアウト</a></p>
+{% endif %}
+{% endblock %}
