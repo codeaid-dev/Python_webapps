@@ -10,6 +10,8 @@ Flask実習 Session
 {% block contents %}
 {% if username %}
   <p>{{ username }} - ログイン中です。</p>
-  <p><a href="{{ url_for('logout') }}">ログアウト</a></p>
+  <form action="{{ url_for('logout') }}" method="POST">
+    <button type="submit" name="logout">ログアウト</button>
+  </form>
 {% endif %}
 {% endblock %}

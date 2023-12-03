@@ -3,7 +3,7 @@ from datetime import timedelta
 
 app = Flask(__name__)
 app.secret_key = 'Msd4EsJIk6AoVD3g' #セッション情報を暗号化するためのキー
-app.permanent_session_lifetime = timedelta(minutes=1) #セッション有効期限1分
+app.permanent_session_lifetime = timedelta(seconds=30) #セッション有効期限30秒
 
 @app.route('/')
 def index():
@@ -24,16 +24,13 @@ def login():
             session['username'] = username
             return redirect(url_for('index'))
         else:
-            error = 'ログインに失敗しました。'
+            error = 'パスワードが違います。'
     return render_template('login.html', error=error)
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
-    if not 'username' in session:
-        return redirect(url_for('login'))
-    username = session['username']
     session.pop('username', None)
-    return render_template('logout.html', username=username)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
