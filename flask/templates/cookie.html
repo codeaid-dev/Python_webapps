@@ -3,10 +3,13 @@
 
 {# タイトルのブロックを記述 #}
 {% block title %}
-Flask実習 Cookies
+Flask実習 Cookie
 {% endblock %}
 
 {# コンテンツのブロックを記述 #}
 {% block contents %}
 <h2>アクセス数：{{ count }}回</h2>
+<form method="POST">
+  <button type="submit" name="clear">カウントクリア</button>
+</form>
 {% endblock %}
