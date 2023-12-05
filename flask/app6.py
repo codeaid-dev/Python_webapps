@@ -8,18 +8,18 @@ app = Flask(__name__)
 def index():
     count = request.cookies.get('count')
     if count is None:
-        count = 0
+        count = 1
     else:
         count = int(count)
-    count += 1
+        count += 1
     if 'clear' in request.form:
-        max_age = 0 #すぐ削除
-        count = 0
+        max_age = 0
+        expires = int(datetime.now().timestamp()) #すぐ削除
+        response = make_response(redirect(url_for('index')))
     else:
-        max_age = 20 #20秒
-    expires = int(datetime.now().timestamp())+max_age
-    response = make_response(
-        render_template('cookie.html', count=count))
+        max_age = 20
+        expires = int(datetime.now().timestamp())+20 #20秒
+        response = make_response(render_template('cookie.html', count=count))
     response.set_cookie('count',
                         value=str(count),
                         max_age=max_age,
