@@ -1,6 +1,6 @@
 from flask import session
 import os, json, hashlib
-from werkzeug.security import generate_password_hash, check_password_hash
+#from werkzeug.security import generate_password_hash, check_password_hash
 
 BASE_DIR = os.path.dirname(__file__)
 USER_FILE = BASE_DIR + '/data/users.json'
@@ -29,8 +29,8 @@ def add_user(user, password):
     users = load_users()
     if user in users:
         return False
-    #users[user] = password_hash(password)
-    users[user] = generate_password_hash(password)
+    users[user] = password_hash(password)
+    #users[user] = generate_password_hash(password)
     save_users(users)
     return True
 
@@ -41,8 +41,8 @@ def login(user, password):
     users = load_users()
     if not user in users:
         return False
-    if not check_password_hash(users[user], password):
-    #if not password_verify(password, users[user]):
+    #if not check_password_hash(users[user], password):
+    if not password_verify(password, users[user]):
         return False
     session['login'] = user
     return True
