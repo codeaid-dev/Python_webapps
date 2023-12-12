@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from datetime import datetime
 import os
-import imghdr
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -9,16 +8,9 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024
 app.secret_key = os.urandom(16)
 
-def allowed_file(file, name=True):
-    if name:
-        return '.' in file and \
-               file.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-    else:
-        if '.' in file.filename and \
-               file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
-            return imghdr.what(file.stream) in ALLOWED_EXTENSIONS
-        else:
-            return False
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
@@ -33,8 +25,8 @@ def upload_file():
             flash('ファイルが選択されていません。')
             return redirect(request.url)
         # ファイル名をチェックして画像ファイルか確認
-        if file and allowed_file(file,name=False):
-            filename = file.filename.rsplit('.', 1)[0] + '_' + datetime.now().strftime('%Y%m%d%H%M%S')
+        if file and allowed_file(file.filename):
+            filename = file.filename.rsplit('.', 1)[0]+'_'+datetime.now().strftime('%Y%m%d%H%M%S')
             filename += '.' + file.filename.rsplit('.', 1)[1]
             file.save(os.path.join('./static/images', filename))
             return redirect(url_for('gallery', page=1))
@@ -42,7 +34,7 @@ def upload_file():
             flash('画像ファイルではありません。')
             return redirect(request.url)
 
-    return render_template('upload.html')
+    return render_template('upload2.html')
 
 @app.route('/gallery/')
 def gallery():
@@ -61,28 +53,7 @@ def gallery():
     else:
         kwargs['pages'] = 0
 
-    return render_template('gallery.html', **kwargs)
-
-@app.route('/delete', methods=['GET', 'POST'])
-def delete():
-    kwargs = {}
-    kwargs['msg'] = '画像はまだありません。'
-    with os.scandir('./static/images') as it:
-        entries = [entry.name for entry in it if entry.is_file() and allowed_file(entry.name)]
-    entries.sort()
-    cnt = len(entries)
-    if cnt > 0:
-        kwargs['msg'] = f'合計{cnt}枚の画像があります。'
-        kwargs['entries'] = entries
-
-    if request.method == 'POST':
-        if 'files' in request.form:
-            files = request.form.getlist('files')
-        for fn in files:
-            os.remove('./static/images/'+fn)
-        return redirect(request.url)
-
-    return render_template('delete.html', **kwargs)
+    return render_template('gallery2.html', **kwargs)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
