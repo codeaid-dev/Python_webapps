@@ -9,9 +9,9 @@ MESSAGE = './message.txt'
 def index():
     msg = '書き込みはありません。'
     if os.path.exists(MESSAGE):
-        with open(MESSAGE, 'r') as f:
+        with open(MESSAGE, 'r' ,encoding='utf-8', newline='') as f:
             msg = f.read()
-        msg = msg.replace('\n', '<br>')
+        #msg = msg.replace('\n', '<br>')
 
     return render_template('app3.html', msg=msg)
 
@@ -19,7 +19,7 @@ def index():
 def write():
     if 'msg' in request.form:
         msg = str(request.form['msg'])
-        with open(MESSAGE, 'w') as f:
+        with open(MESSAGE, 'w',encoding='utf-8', newline='') as f:
             f.write(msg)
     return redirect('/')
 
