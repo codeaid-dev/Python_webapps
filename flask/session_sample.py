@@ -3,7 +3,6 @@ from datetime import timedelta
 import random, string
 
 app = Flask(__name__)
-#app.secret_key = 'Msd4EsJIk6AoVD3g' #セッション情報を暗号化するためのキー
 app.secret_key = ''.join(random.choices(string.ascii_letters + string.digits, k=16)) #セッション情報を暗号化するためのキー
 app.permanent_session_lifetime = timedelta(seconds=30) #セッション有効期限30秒
 
