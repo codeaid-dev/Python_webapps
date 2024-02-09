@@ -37,7 +37,7 @@ def index():
         count,win = 0,0
         result = []
     response = make_response(render_template('drill14.html', result=result))
-    max_age = 60 * 5
+    max_age = 60 * 1
     expires = int(datetime.now().timestamp())+max_age
     response.set_cookie('count', value=str(count), max_age=max_age, expires=expires)
     response.set_cookie('win', value=str(win), max_age=max_age, expires=expires)
