@@ -5,14 +5,18 @@
 {% endblock %}
 
 {% block contents %}
-<h2>ページ{{page}}の画面</h2>
-<p>
-  {% for i in range(1,6) %}
-    {% if i != page %}
-      <span style="margin: 5px;"><a href="test?page={{i}}">{{i}}</a></span>
-    {% else %}
-      <span style="margin: 5px;">{{i}}</span>
-    {% endif %}
-  {% endfor %}
+{% if 0 < page <= 5 %}
+  <h2>ページ{{page}}の画面</h2>
+  <p>
+    {% for i in range(1,6) %}
+      {% if i != page %}
+        <span style="margin: 5px;"><a href="drill9?page={{i}}">{{i}}</a></span>
+      {% else %}
+        <span style="margin: 5px;">{{i}}</span>
+      {% endif %}
+    {% endfor %}
+{% else %}
+  <h2>ページはありません。</h2>
+{% endif %}
 </p>
 {% endblock %}
