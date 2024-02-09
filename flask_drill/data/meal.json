@@ -8,5 +8,10 @@
     "breakfast": "ご飯と味噌汁",
     "dinner": "すき焼き",
     "lunch": "焼き魚定食"
+  },
+  "2024-02-09": {
+    "breakfast": "<script>alert('aa');</script>",
+    "dinner": "<script>alert('aa');</script>",
+    "lunch": "<script>alert('aa');</script>"
   }
 }
