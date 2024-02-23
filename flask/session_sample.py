@@ -1,9 +1,10 @@
 from flask import Flask, render_template, redirect, request, url_for, session
 from datetime import timedelta
-import random, string
+import os
+from base64 import b64encode
 
 app = Flask(__name__)
-app.secret_key = ''.join(random.choices(string.ascii_letters + string.digits, k=16)) #セッション情報を暗号化するためのキー
+app.secret_key = b64encode(os.urandom(16)).decode() #セッション情報を暗号化するためのキー
 app.permanent_session_lifetime = timedelta(seconds=30) #セッション有効期限30秒
 
 @app.route('/')
