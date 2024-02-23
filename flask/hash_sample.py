@@ -8,7 +8,7 @@ app = Flask(__name__)
 app.secret_key = ''.join(random.choices(string.ascii_letters + string.digits, k=16)) #セッション情報を暗号化するためのキー
 app.permanent_session_lifetime = timedelta(seconds=30) #セッション有効期限30秒
 
-def to_hash(password):
+def hash_password(password):
     salt = ''.join(random.choices(string.ascii_letters + string.digits, k=16))
     password += salt
     text = password.encode('utf-8')
@@ -38,7 +38,7 @@ def signup():
         json_dict = {}
     username = request.form['username']
     password = generate_password_hash(request.form['password'])
-    #password = to_hash(request.form['password'])
+    #password = hash_password(request.form['password'])
     json_dict[username] = password
     with open('hash_sample.json', 'w', encoding='utf-8') as fp:
         json.dump(json_dict, fp, sort_keys=True, ensure_ascii=False, indent=2)
