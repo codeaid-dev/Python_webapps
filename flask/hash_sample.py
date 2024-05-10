@@ -40,7 +40,7 @@ def signup():
     json_dict[username] = password
     with open('hash_sample.json', 'w', encoding='utf-8') as fp:
         json.dump(json_dict, fp, sort_keys=True, ensure_ascii=False, indent=2)
-    return render_template('hash_sample.html')
+    return redirect(url_for('index'))
 
 @app.route('/login', methods=['GET','POST'])
 def login():
