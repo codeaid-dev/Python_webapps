@@ -8,7 +8,7 @@ def index():
     lower = 'abcdefghijklmnopqrstuvwxyz'
     upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     numbers = '0123456789'
-    symbols = '!@#$%^&*()_+-=[]\{\};:,.<>?'
+    symbols = '!@#$%^&*()_+-=[]{};:,.<>?'
     if request.method == 'POST' and 'generate' in request.form:
         digit = request.form['digit']
         if digit.isdigit() and 8<=int(digit)<=32:
