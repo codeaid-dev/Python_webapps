@@ -151,4 +151,4 @@ def login():
         return '<h1>失敗</h1>'
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, port='8000')

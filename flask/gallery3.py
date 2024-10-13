@@ -56,4 +56,4 @@ def gallery():
     return render_template('gallery2.html', **kwargs)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(port='8000', debug=True)

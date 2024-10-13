@@ -91,4 +91,4 @@ def datestr_filter(s):
     return time.strftime('%Y年%m月%d日', time.localtime(s))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, port='8000')

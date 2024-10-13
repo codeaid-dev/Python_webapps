@@ -16,4 +16,4 @@ def show_subpath(subpath):
     return f'サブパス {escape(subpath)}'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(port='8000', debug=True)
