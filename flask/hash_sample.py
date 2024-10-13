@@ -6,7 +6,7 @@ import json
 from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
-app.secret_key = b64encode(os.urandom(16)).decode() #セッション情報を暗号化するためのキー
+app.secret_key = 'sLd+i2-jIa=sWa38' #セッション情報を暗号化するためのキー
 app.permanent_session_lifetime = timedelta(seconds=30) #セッション有効期限30秒
 
 def hash_password(password):
