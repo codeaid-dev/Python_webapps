@@ -11,27 +11,44 @@
     <legend>数字</legend>
     <div>
     {% for i in range(6) %}
-    {% if i==0 %}
-      <label><input type="radio" name="nums" value="{{i*10}}" checked>{{ i }}0</label>
-    {% else %}
-      <label><input type="radio" name="nums" value="{{i*10}}">{{ i }}0</label>
-    {% endif %}
+      {% if num==None and i==0 %}
+        <label><input type="radio" name="nums" value="{{1}}" checked>1</label>
+      {% elif i+1==num %}
+        <label><input type="radio" name="nums" value="{{num}}" checked>{{ num }}</label>
+      {% else %}
+        <label><input type="radio" name="nums" value="{{i+1}}">{{ i+1 }}</label>
+      {% endif %}
     {% endfor %}
     </div>
   </fieldset>
   <fieldset style="width: 400px;">
     <legend>色</legend>
     <div>
-    <label><input type="radio" name="colors" value="赤" checked>赤</label>
-    <label><input type="radio" name="colors" value="黒">黒</label>
+      {% if color!=None and color=='黒' %}
+        <label><input type="radio" name="colors" value="赤">赤</label>
+        <label><input type="radio" name="colors" value="黒" checked>黒</label>
+      {% else %}
+        <label><input type="radio" name="colors" value="赤" checked>赤</label>
+        <label><input type="radio" name="colors" value="黒">黒</label>
+      {% endif %}
     </div>
   </fieldset>
   <p>
   <label for="bets">賭ける種類：</label>
   <select name="bets" id="bets">
-    <option value="1">数字と色の組み合わせ</option>
-    <option value="2">数字のみ</option>
-    <option value="3">色のみ</option>
+    {% if bet==1 or bet==None %}
+      <option value="1" selected>数字と色の組み合わせ</option>
+      <option value="2">数字のみ</option>
+      <option value="3">色のみ</option>
+    {% elif bet==2 %}
+      <option value="1">数字と色の組み合わせ</option>
+      <option value="2" selected>数字のみ</option>
+      <option value="3">色のみ</option>
+    {% else %}
+      <option value="1">数字と色の組み合わせ</option>
+      <option value="2">数字のみ</option>
+      <option value="3" selected>色のみ</option>
+    {% endif %}
   </select>
   </p>
   <p><button type="submit">回す</button></p>
