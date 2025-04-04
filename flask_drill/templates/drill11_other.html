@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポーカーの役判定</title>
+</head>
+<body>
+    <div class="container">
+        <h1>ポーカーの役判定</h1>
+
+        <div class="buttons">
+            <div style="display: flex; justify-content: space-around;">
+                {% for i in range(5) %}
+                    <div style="text-align: center;">
+                        <p>{{ hand[i] if hand[i] != None else "[カード]" }}</p>
+                        <form action="/" method="POST" class="btn-form">
+                            <button type="submit" name="button_id" value="{{ i }}" {% if hand[i] is not none %}disabled{% endif %}>
+                                めくる
+                            </button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <h1>結果表示</h1>
+        <p>{{ hand_type }}</p>
+    </div>
+</body>
+</html>
