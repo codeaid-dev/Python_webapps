@@ -12,7 +12,12 @@
   {% else %}
     <p><label>名前：<input type="text" name="customer" required></label></p>
   {% endif %}
-  <table border="1">
+  <style>
+    table, th, td {
+      border: 1px solid;
+    }
+  </style>
+  <table>
     <thead>
       <tr>
         <th>番号</th>
