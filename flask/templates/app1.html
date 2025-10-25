@@ -8,8 +8,13 @@
 
 {# コンテンツのブロックを記述 #}
 {% block contents %}
+  <style>
+    table, th, td {
+      border: 1px solid;
+    }
+  </style>
   <div>
-    <table border="solid">
+    <table>
       <thead>
         <tr>
           <th>メニュー</th>
