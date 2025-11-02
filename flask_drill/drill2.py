@@ -32,8 +32,8 @@ def index():
                 year += 1
             else:
                 month += 1
-        #msg = f'次の日は「{year}年{month:02d}月{day:02d}日」'
-        msg = f'次の日は「{next.year}年{next.month:02d}月{next.day:02d}日」'
+        msg = f'次の日は「{year}年{month:02d}月{day:02d}日」'
+        # msg = f'次の日は「{next.year}年{next.month:02d}月{next.day:02d}日」'
     else:
         msg = None
 
