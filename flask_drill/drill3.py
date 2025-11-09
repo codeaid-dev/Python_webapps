@@ -9,7 +9,7 @@ def index():
     if request.method == 'POST':
         month = int(request.form['month'])
         day = int(request.form['day'])
-        if month == 2 and day >=29:
+        if month == 2 and day >= 30:
             day = 29
         elif month in [4,6,9,11] and day >= 31:
             day = 30
