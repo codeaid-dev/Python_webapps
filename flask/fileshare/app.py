@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, redirect, request
 from flask import render_template, send_file
 import os, json, time

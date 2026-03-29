@@ -1,6 +1,5 @@
-from crypt import methods
-from flask import Flask, redirect, render_template
-from flask import request, Markup
+from flask import Flask, redirect, render_template, request
+from markupsafe import Markup
 import os, time
 import sns_user as user, sns_data as data
 
