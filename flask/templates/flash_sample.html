@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+flashサンプル
+{% endblock %}
+
+{% block contents %}
+<style>
+  .success { color: green; }
+  .error { color: red; }
+</style>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul>
+      {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<form method="POST">
+  ユーザー名：<input type="text" name="username"><br>
+  パスワード：<input type="text" name="password"><br>
+  <button type="submit">登録</button>
+</form>
+{% endblock %}
