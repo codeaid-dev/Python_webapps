@@ -13,13 +13,13 @@ def index():
         digit = request.form['digit']
         if digit.isdigit() and 8<=int(digit)<=32:
             digit = int(digit)
-            char = random.choice(list(lower))
-            char += random.choice(list(upper))
-            char += random.choice(list(numbers))
-            char += random.choice(list(symbols))
+            char = random.choice(lower)
+            char += random.choice(upper)
+            char += random.choice(numbers)
+            char += random.choice(symbols)
             password = char
             for i in range(digit-len(char)):
-                password += random.choice(list(lower+upper+numbers+symbols))
+                password += random.choice(lower+upper+numbers+symbols)
             password = ''.join(random.sample(password, len(password)))
             error = None
         else:
