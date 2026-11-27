@@ -34,7 +34,7 @@ def index():
                 errors.append('このメールアドレスはすでに回答済みです。')
         if not maker:
             errors.append('PCメーカーを選択してください。')
-        comp = re.compile('[\w\-.]+@[\w\-.]+\.[a-zA-Z]+')
+        comp = re.compile(r'[\w\-.]+@[\w\-.]+\.[a-zA-Z]+')
         m = re.match(comp,email)
         if m == None:
             errors.append('正しいメールアドレスを入力してください。')
