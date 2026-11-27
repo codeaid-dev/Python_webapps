@@ -45,12 +45,12 @@ def index():
         for user in users:
             if username in user:
                 result['error'].append('登録済みのユーザーです。')
-        comp = re.compile('[\w\-.]+@[\w\-.]+\.[a-zA-Z]+')
+        comp = re.compile(r'[\w\-.]+@[\w\-.]+\.[a-zA-Z]+')
         m = re.match(comp,email)
         if m == None:
             result['error'].append('無効なメールアドレスです。')
         password = request.form['password']
-        comp = re.compile('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_])[\w\W]{8,32}$')
+        comp = re.compile(r'(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\W_])[\w\W]{8,32}$')
         m = re.match(comp,password)
         if m == None:
             result['error'].append('パスワードは8~32文字で大小文字英字数字記号をそれぞれ1文字以上含める必要があります。')

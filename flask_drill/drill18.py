@@ -16,7 +16,7 @@ def index():
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
-        rm = re.compile('[\w\-.]+@[\w\-.]+\.[a-zA-Z]+')
+        rm = re.compile(r'[\w\-.]+@[\w\-.]+\.[a-zA-Z]+')
         m = re.match(rm,email)
         if m != None:
             if username in users.keys():
